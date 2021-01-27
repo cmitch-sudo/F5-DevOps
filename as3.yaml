@@ -1,0 +1,28 @@
+---
+- name: DEPLOY AS3 DECLARATION
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - ../creds/bigip.yaml
+    
+
+  vars:
+    
+
+  tasks:
+
+  - name: Create an AS3 declaration
+    uri:
+      url: https://18.133.35.147/mgmt/shared/appsvcs/declare
+      user: "{{ bigip_user}}"
+      password: "{{ bigip_pass}}"
+      method: POST
+      body: "{{ lookup('file','AS3.json') }}"
+      force_basic_auth: yes
+      status_code: 200
+      body_format: json
+      validate_certs: no
+    
+...
